@@ -45,7 +45,7 @@ int main (int argc, char **argv)
     }
     if (encode_flag)
     {
-        /* rewind file because we already read some bytes */
+        /* go back or rewind because we already read some bytes */
         fseek (inp, 0, SEEK_SET);
         printf ("encoding input file: '%s'\n", filename_buffer);
     } else
