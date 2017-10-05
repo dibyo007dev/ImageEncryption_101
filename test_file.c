@@ -22,11 +22,13 @@ int main (int argc, char **argv)
     }
 
     filename_buffer[0] = 0;
+
     if (!strchr(argv[1], '/') && !strchr(argv[1], 92) && !strchr(argv[1], ':'))
         strcpy (filename_buffer, INPUTPATH);
     strcat (filename_buffer, argv[1]);
 
     inp = fopen (filename_buffer, "rb");
+    
     if (inp == NULL)
     {
         printf ("bad input file '%s'\n", filename_buffer);
@@ -74,6 +76,6 @@ int main (int argc, char **argv)
     } while (i != EOF);
     fclose (inp);
     fclose (outp);
-    printf ("all done. bye bye\n");
+    printf ("All done and file of your desired name is created in the same folder \n");
     return 0;
 }
