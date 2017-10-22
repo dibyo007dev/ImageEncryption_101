@@ -47,35 +47,40 @@ int main (int argc, char **argv)
     }
     if (encode_flag)
     {
-        /* go back or rewind because we already read some bytes */
+        // go back or rewind because we already read some bytes 
         fseek (inp, 0, SEEK_SET);
         printf ("encoding input file: '%s'\n", filename_buffer);
     } else
         printf ("decoding input file: '%s'\n", filename_buffer);
 
     filename_buffer[0] = 0;
-    if (!strchr(argv[2], '/') && !strchr(argv[2], 92) && !strchr(argv[2], ':'))
+    
         strcpy (filename_buffer, OUTPUTPATH);
     strcat (filename_buffer, argv[2]);
 
     outp = fopen (filename_buffer, "wb");
+    
     if (outp == NULL)
     {
         printf ("bad output file '%s'\n", filename_buffer);
         return -2;
     }
+    
     printf ("output file: '%s'\n", filename_buffer);
 
     if (encode_flag)
         fwrite (sig, 1, 4, outp);
     do
-    {
-        i = fgetc(inp);
-        if (i != EOF)
-            fputc (i ^ 0x8d, outp);
-    } while (i != EOF);
+        {
+            i = fgetc(inp);
+            if (i != EOF)
+                fputc (i ^ 0x8d, outp);
+        }       
+    while (i != EOF);
+
     fclose (inp);
     fclose (outp);
+    
     printf ("All done and file of your desired name is created in the same folder \n");
     return 0;
 }
